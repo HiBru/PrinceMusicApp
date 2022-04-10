@@ -16,6 +16,4 @@ object Converters {
 
     @TypeConverter
     fun toCommunity(value: String): Community = Gson().fromJson(value, Community::class.java)
-
-
 }

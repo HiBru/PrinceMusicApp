@@ -25,9 +25,9 @@
         android:id="@+id/release_detail"
         android:name="de.hicedevelopments.princemusicapp.ui.releasedetail.ReleaseDetailScreen"
         tools:layout="@layout/view_release_detail">
-        <action
-            android:id="@+id/nav_release_detail_to_artist_detail"
-            app:destination="@+id/artist_detail"/>
+        <argument
+            android:name="releaseId"
+            app:argType="string"/>
     </fragment>
     <fragment
         android:id="@+id/artist_detail"

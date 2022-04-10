@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id 'androidx.navigation.safeargs.kotlin'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -74,6 +74,7 @@ dependencies {
     implementation "io.insert-koin:koin-core:$koin_version"
 
     //Navigation
+    implementation "androidx.navigation:navigation-runtime-ktx:$navigationKtxVersion"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationKtxVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationKtxVersion"
 
