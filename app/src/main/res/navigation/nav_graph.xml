@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splash">
+
+    <fragment
+        android:id="@+id/splash"
+        android:name="de.hicedevelopments.princemusicapp.ui.splash.SplashScreen"
+        tools:layout="@layout/view_splash">
+        <action
+            android:id="@+id/nav_splash_to_release_list"
+            app:destination="@+id/release_list"/>
+    </fragment>
+    <fragment
+        android:id="@+id/release_list"
+        android:name="de.hicedevelopments.princemusicapp.ui.releaselist.ReleaseListScreen"
+        tools:layout="@layout/view_release_list">
+        <action
+            android:id="@+id/nav_release_list_to_release_detail"
+            app:destination="@+id/release_detail"/>
+    </fragment>
+    <fragment
+        android:id="@+id/release_detail"
+        android:name="de.hicedevelopments.princemusicapp.ui.releasedetail.ReleaseDetailScreen"
+        tools:layout="@layout/view_release_detail">
+        <action
+            android:id="@+id/nav_release_detail_to_artist_detail"
+            app:destination="@+id/artist_detail"/>
+    </fragment>
+    <fragment
+        android:id="@+id/artist_detail"
+        android:name="de.hicedevelopments.princemusicapp.ui.artistdetail.ArtistDetailScreen"
+        tools:layout="@layout/view_artist_detail"/>
+
+</navigation>

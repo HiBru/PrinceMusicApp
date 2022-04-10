@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">PrinceMusicApp</string>
+
+    <!--    ALERT AND INPUT ERRORS  -->
+    <string name="alert_default_positive_btn">OK</string>
+    <string name="alert_default_negative_btn">Abbrechen</string>
+
+    <!--    NETWORK ERROR   -->
+    <string name="client_error_title">@string/unknown_error_title</string>
+    <string name="client_error_desc">@string/unknown_error_desc</string>
+    <string name="network_error_title">Keine Internetverbindung</string>
+    <string name="network_error_desc">Bitte überprüfe Deine Datenverbindung in den Einstellungen und stelle sicher, dass Dein Gerät mit dem Internet verbunden ist.</string>
+    <string name="not_found_error_title">Unbekannte Aktion</string>
+    <string name="not_found_error_desc">Die Ausführung der Aktion ist im Moment nicht möglich.</string>
+    <string name="server_error_title">@string/unknown_error_title</string>
+    <string name="server_error_desc">@string/unknown_error_desc</string>
+    <string name="unknown_error_title">Unbekannter Fehler</string>
+    <string name="unknown_error_desc">Es ist ein unbekannter Fehler aufgetreten.</string>
+
+</resources>

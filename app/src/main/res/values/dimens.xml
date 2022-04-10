@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Margins/padding-->
+    <dimen name="margin_tiny">2dp</dimen>
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="margin_normal">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+    <dimen name="margin_extra_large">32dp</dimen>
+    <dimen name="margin_huge">48dp</dimen>
+    <dimen name="margin_enormous">64dp</dimen>
+    <dimen name="padding_tiny">@dimen/margin_tiny</dimen>
+    <dimen name="padding_small">@dimen/margin_small</dimen>
+    <dimen name="padding_normal">@dimen/margin_normal</dimen>
+    <dimen name="padding_medium">@dimen/margin_medium</dimen>
+    <dimen name="padding_large">@dimen/margin_large</dimen>
+    <dimen name="padding_extra_large">@dimen/margin_extra_large</dimen>
+    <dimen name="padding_huge">@dimen/margin_huge</dimen>
+    <dimen name="padding_enormous">@dimen/margin_enormous</dimen>
+
+    <!--Fonts-->
+    <dimen name="font_smaller">10sp</dimen>
+    <dimen name="font_small">12sp</dimen>
+    <dimen name="font_normal">15sp</dimen>
+    <dimen name="font_medium">18sp</dimen>
+    <dimen name="font_large">20sp</dimen>
+    <dimen name="font_xlarge">24sp</dimen>
+    <dimen name="font_xlarger">28sp</dimen>
+    <dimen name="font_xxlarge">32sp</dimen>
+    <dimen name="font_huge">48sp</dimen>
+
+</resources>
