@@ -1,8 +1,11 @@
 package de.hicedevelopments.princemusicapp.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "results")
 data class Result(
     @SerializedName("style")
     @Expose
@@ -45,6 +48,7 @@ data class Result(
     var type: String? = null,
     @SerializedName("id")
     @Expose
+    @PrimaryKey
     var id: Int = 0,
     @SerializedName("barcode")
     @Expose

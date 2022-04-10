@@ -1,5 +1,6 @@
 package de.hicedevelopments.princemusicapp.data.repository
 
+import de.hicedevelopments.princemusicapp.data.local.dao.ResultDao
 import de.hicedevelopments.princemusicapp.data.model.Artist
 import de.hicedevelopments.princemusicapp.data.model.Release
 import de.hicedevelopments.princemusicapp.data.model.Result
@@ -17,14 +18,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.onEach
 import org.koin.dsl.module
 
 val repoModule = module {
-    single { Repo(get()) }
+    single { Repo(get(), get()) }
 }
 
 class Repo(
-    private val api: DiscogsApi
+    private val api: DiscogsApi,
+    private val resultDao: ResultDao
 ) {
 
     fun getAlbumList(): Flow<List<Result>?> = flow {
@@ -43,6 +46,8 @@ class Repo(
                 }
             }
         }
+    }.onEach {
+        insertResults(it)
     }.flowOn(Dispatchers.IO)
 
     fun getRelease(id: String): Flow<Release?> = flow {
@@ -62,4 +67,10 @@ class Repo(
             }
         }
     }.flowOn(Dispatchers.IO)
+
+    /**
+     * RESULT DAO
+     */
+    private fun insertResults(items: List<Result>?) = resultDao.insertAll(items)
+    fun getResults(): Flow<List<Result>?> = resultDao.getResults()
 }

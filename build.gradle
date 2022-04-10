@@ -9,9 +9,10 @@ buildscript {
     ext.kotlin_version = "1.6.10"
     ext.kotlinCoroutineVersion = "1.5.2"
     ext.navigationVersion = "2.3.5"
-    ext.navigationKtxVersion = "2.4.1"
+    ext.navigationKtxVersion = "2.4.2"
     ext.okhttpVersion = "4.9.1"
     ext.retrofitVersion = "2.9.0"
+    ext.roomVersion = "2.4.2"
 
     repositories {
         google()

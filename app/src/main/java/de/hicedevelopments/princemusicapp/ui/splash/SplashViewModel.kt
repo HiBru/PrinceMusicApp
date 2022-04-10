@@ -1,20 +1,16 @@
 package de.hicedevelopments.princemusicapp.ui.splash
 
-import androidx.lifecycle.MutableLiveData
 import de.hicedevelopments.princemusicapp.app.BaseViewModel
-import de.hicedevelopments.princemusicapp.data.model.Artist
-import de.hicedevelopments.princemusicapp.data.model.Release
+import de.hicedevelopments.princemusicapp.common.SingleLiveEvent
 import de.hicedevelopments.princemusicapp.data.model.Result
 import de.hicedevelopments.princemusicapp.data.repository.Repo
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.collect
 
 class SplashViewModel(
     private val repo: Repo
 ) : BaseViewModel() {
 
-    val results = MutableLiveData<List<Result>>()
-    val release = MutableLiveData<Release>()
-    val artist = MutableLiveData<Artist>()
+    val results = SingleLiveEvent<List<Result>>()
 
     init {
         getAlbumList()
@@ -22,19 +18,8 @@ class SplashViewModel(
 
     private fun getAlbumList() = asyncWithLoadingState {
         repo.getAlbumList().collect { items ->
+                isLoading.postValue(false)
                 results.postValue(items)
-            }
-    }
-
-    fun getRelease(id: String) = asyncWithLoadingState {
-        repo.getRelease("$id").collect { item ->
-                release.postValue(item)
-            }
-    }
-
-    fun getArtistInfo(id: String) = asyncWithLoadingState {
-        repo.getArtistInfo("$id").collect { item ->
-                artist.postValue(item)
             }
     }
 }

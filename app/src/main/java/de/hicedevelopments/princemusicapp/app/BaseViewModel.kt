@@ -31,9 +31,9 @@ abstract class BaseViewModel : ViewModel(), ErrorHandler, KoinComponent {
     }
 
     private fun async(before: () -> Unit = {}, bgFunction: suspend () -> Unit, after: () -> Unit = {}) = viewModelScope.launch {
-        catchError { before() }
+        before()
         catchError { bgFunction() }
-        catchError { after() }
+        after()
     }
 
     private suspend fun catchError(toGuard: suspend () -> Any) {
