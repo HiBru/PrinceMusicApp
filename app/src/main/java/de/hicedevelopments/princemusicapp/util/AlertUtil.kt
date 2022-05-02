@@ -1,6 +1,7 @@
 package de.hicedevelopments.princemusicapp.util
 
 import android.content.Context
+import android.content.DialogInterface
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import de.hicedevelopments.princemusicapp.R
@@ -34,12 +35,13 @@ object AlertUtil {
         @StringRes title: Int?,
         @StringRes message: Int,
         @StringRes positiveBtn: Int? = null,
-        cancelable: Boolean = false) {
+        cancelable: Boolean = false,
+        onButtonClick: (DialogInterface) -> Unit = {}) {
         AlertDialog.Builder(context, R.style.DialogTheme)
             .apply { title?.let { setTitle(it) } }
             .setMessage(message)
             .setCancelable(cancelable)
-            .setPositiveButton(positiveBtn ?: defaultPositiveBtn) { dialog, _ -> dialog.dismiss() }
+            .setPositiveButton(positiveBtn ?: defaultPositiveBtn) { dialog, _ -> onButtonClick(dialog) }
             .create()
             .show()
     }

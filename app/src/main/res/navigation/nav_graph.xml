@@ -22,6 +22,9 @@
         <action
             android:id="@+id/nav_release_list_to_release_detail"
             app:destination="@+id/release_detail"/>
+        <action
+            android:id="@+id/nav_release_list_to_artist_detail"
+            app:destination="@id/artist_detail" />
     </fragment>
     <fragment
         android:id="@+id/release_detail"

@@ -23,8 +23,8 @@ abstract class BaseViewModel : ViewModel(), ErrorHandler, KoinComponent {
         errorState.postValue(err)
     }
 
-    fun asyncWithLoadingState(loadingState: MutableLiveData<Boolean> = isLoading, bgFunction: suspend () -> Unit): Job {
-        val before = { loadingState.postValue(true) }
+    fun asyncWithLoadingState(loadingState: MutableLiveData<Boolean> = isLoading, withLoadingState: Boolean = true, bgFunction: suspend () -> Unit): Job {
+        val before = { loadingState.postValue(withLoadingState) }
         val after = { loadingState.postValue(false) }
 
         return async(before, bgFunction, after)

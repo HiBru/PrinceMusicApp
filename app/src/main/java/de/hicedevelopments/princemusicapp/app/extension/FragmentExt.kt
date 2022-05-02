@@ -1,5 +1,6 @@
 package de.hicedevelopments.princemusicapp.app.extension
 
+import android.content.DialogInterface
 import android.view.Gravity
 import android.widget.TextView
 import android.widget.Toast
@@ -24,4 +25,5 @@ fun Fragment.showAlert(
     @StringRes title: Int? = null,
     @StringRes message: Int,
     @StringRes positiveBtn: Int? = null,
-    cancelable: Boolean = false) = AlertUtil.showAlert(context!!, title, message, positiveBtn, cancelable)
+    cancelable: Boolean = false,
+    onButtonClick: (DialogInterface) -> Unit = {}) = AlertUtil.showAlert(requireContext(), title, message, positiveBtn, cancelable, onButtonClick)

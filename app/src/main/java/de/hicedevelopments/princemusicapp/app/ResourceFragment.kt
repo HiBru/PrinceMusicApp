@@ -1,9 +1,10 @@
 package de.hicedevelopments.princemusicapp.app
 
+import android.content.DialogInterface
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import de.hicedevelopments.princemusicapp.app.extension.showAlert
@@ -13,13 +14,32 @@ abstract class ResourceFragment<VB : ViewDataBinding> : BaseFragment() {
 
     private val progressOverlay: ProgressOverlay by lazy { ProgressOverlay(requireContext()) }
 
-    private lateinit var binding: VB
+    protected open var optionsMenu: Int? = null
+    protected lateinit var binding: VB
     protected abstract val layoutId: Int
     protected abstract val viewModel: BaseViewModel
 
     protected abstract fun bindViewModel(binding: VB)
 
     open fun showLoading(isLoading: Boolean) = progressOverlay.show(isLoading)
+    open fun onErrorMessageButtonClick(err: NetworkErr, dialog: DialogInterface) {
+        Log.e("ERROR MESSAGE CLICK", err.toString())
+        when(err) {
+            NetworkErr.onNetworkError() -> onBackPressed()
+            else -> dialog.dismiss()
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(optionsMenu != null)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        optionsMenu?.let {
+            inflater.inflate(it, menu)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,5 +62,7 @@ abstract class ResourceFragment<VB : ViewDataBinding> : BaseFragment() {
         viewModel.errorState.observe(viewLifecycleOwner) { handlerErrorState(it) }
     }
 
-    private fun handlerErrorState(err: NetworkErr) = showAlert(err.title, err.desc)
+    private fun handlerErrorState(err: NetworkErr) = showAlert(err.title, err.desc) { dialog ->
+        onErrorMessageButtonClick(err, dialog)
+    }
 }

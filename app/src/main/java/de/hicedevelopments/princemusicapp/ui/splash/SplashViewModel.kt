@@ -16,9 +16,8 @@ class SplashViewModel(
         getAlbumList()
     }
 
-    private fun getAlbumList() = asyncWithLoadingState {
+    private fun getAlbumList() = asyncWithLoadingState(withLoadingState = false) {
         repo.getAlbumList().collect { items ->
-                isLoading.postValue(false)
                 results.postValue(items)
             }
     }
