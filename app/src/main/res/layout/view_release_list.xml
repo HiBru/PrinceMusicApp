@@ -1,24 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="viewModel"
             type="de.hicedevelopments.princemusicapp.ui.releaselist.ReleaseListViewModel" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/padding_medium"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textColor="@color/black"
-            android:text="RELEASE LIST SCREEN" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="false"
+        android:background="@color/purple">
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:backgroundTint="@color/purple"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentScrim="@color/purple"
+                app:expandedTitleGravity="top"
+                app:expandedTitleTextColor="@android:color/transparent"
+                app:collapsedTitleTextColor="@color/gold"
+                app:titleCollapseMode="fade"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/header_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_collapseMode="parallax">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/header"
+                        android:transitionName="love_symbol"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@mipmap/prince_the_symbol_gold"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintDimensionRatio="H, 16:9"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:elevation="@dimen/toolbar_elevation"
+                    android:theme="@style/PrinceToolbar"
+                    app:layout_collapseMode="pin"
+                    app:menu="@menu/about_menu"
+                    app:titleTextColor="@color/gold"
+                    app:title="@string/app_name"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/releases"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            app:items="@{viewModel.pagedReleases}"
+            app:itemBinding="@{viewModel.releasesItemBinding}"
+            app:diffConfig="@{viewModel.releasesDiff}"
+            app:addReleaseItemDecoration="@{true}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:listitem="@layout/item_release" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

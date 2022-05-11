@@ -52,5 +52,8 @@ data class Result(
     var id: Int = 0,
     @SerializedName("barcode")
     @Expose
-    var barcode: List<String>? = null
+    var barcode: List<String>? = null,
+    @SerializedName("cover_image")
+    @Expose
+    var coverImage: String? = null
 )

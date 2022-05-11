@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PrinceMusicApp</string>
+    <string name="app_name">Prince Music App</string>
 
     <!--    ALERT AND INPUT ERRORS  -->
     <string name="alert_default_positive_btn">OK</string>

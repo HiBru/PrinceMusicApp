@@ -1,15 +1,16 @@
 package de.hicedevelopments.princemusicapp.data.repository
 
-import de.hicedevelopments.princemusicapp.data.local.dao.ResultDao
-import de.hicedevelopments.princemusicapp.data.model.Artist
-import de.hicedevelopments.princemusicapp.data.model.Release
-import de.hicedevelopments.princemusicapp.data.model.Result
+import de.hicedevelopments.princemusicapp.data.local.dao.ReleaseDao
+import de.hicedevelopments.princemusicapp.data.model.*
 import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi
+import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi.Companion.PAGE
+import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi.Companion.PER_PAGE
 import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi.Companion.SEARCH_ARTIST
 import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi.Companion.SEARCH_COUNTRY
 import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi.Companion.SEARCH_FORMAT
 import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi.Companion.SEARCH_SORT
 import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi.Companion.SEARCH_SORT_ORDER
+import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi.Companion.SEARCH_SUBTYPE
 import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi.Companion.SEARCH_TYPE
 import de.hicedevelopments.princemusicapp.data.remote.NetworkException
 import de.hicedevelopments.princemusicapp.data.remote.NetworkWrapper
@@ -27,30 +28,55 @@ val repoModule = module {
 
 class Repo(
     private val api: DiscogsApi,
-    private val resultDao: ResultDao
+    private val releaseDao: ReleaseDao
 ) {
 
-    fun getAlbumList(): Flow<List<Result>?> = flow {
+    fun getReleases(perPage: Int, page: Int): Flow<Releases?> = flow {
+        api.releases(hashMapOf(
+            //SEARCH_FORMAT to "album",
+            //SEARCH_COUNTRY to "Germany",
+            SEARCH_SORT to "year",
+            SEARCH_SORT_ORDER to "asc",
+            SEARCH_TYPE to "Releases",
+            SEARCH_SUBTYPE to "Albums",
+            PER_PAGE to "$perPage",
+            PAGE to "$page"
+        )).let { response ->
+            with(NetworkWrapper(response)) {
+                when(state) {
+                    Success -> emit(model)
+                    else -> throw NetworkException(state)
+                }
+            }
+        }
+    }/*.onEach { releases ->
+        releases?.releases?.let {
+            insertReleases(it)
+        }
+    }*/.flowOn(Dispatchers.IO)
+
+    fun getAlbumList(perPage: Int, page: Int): Flow<Search?> = flow {
         api.search(hashMapOf(
             SEARCH_ARTIST to "Prince",
-            SEARCH_TYPE to "album",
             SEARCH_FORMAT to "album",
             SEARCH_COUNTRY to "Germany",
             SEARCH_SORT to "year",
-            SEARCH_SORT_ORDER to "asc"
+            SEARCH_SORT_ORDER to "asc",
+            PER_PAGE to "$perPage",
+            PAGE to "$page"
         )).let { response ->
             with(NetworkWrapper(response)) {
                 when (state) {
-                    Success -> emit(model?.results)
+                    Success -> emit(model)
                     else -> throw NetworkException(state)
                 }
             }
         }
     }.onEach {
-        insertResults(it)
+        //insertResults(it)
     }.flowOn(Dispatchers.IO)
 
-    fun getRelease(id: String): Flow<Release?> = flow {
+    fun getRelease(id: String): Flow<Master?> = flow {
         with(NetworkWrapper(api.release(id))) {
             when(state) {
                 Success -> emit(model)
@@ -71,6 +97,7 @@ class Repo(
     /**
      * RESULT DAO
      */
-    private fun insertResults(items: List<Result>?) = resultDao.insertAll(items)
-    fun getResults(): Flow<List<Result>?> = resultDao.getResults()
+    //private fun insertResults(items: List<Result>?) = releaseDao.insertAll(items)
+    private fun insertReleases(items: List<Release>?) = releaseDao.insertAll(items)
+    fun getResults(): Flow<List<Release>?> = releaseDao.getReleases()
 }

@@ -4,7 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.162" />
+        <entry key="app/src/main/res/drawable/release_item_bg.xml" value="0.249" />
+        <entry key="app/src/main/res/drawable/release_section_bg.xml" value="0.249" />
         <entry key="app/src/main/res/layout/item_release.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/item_release_section.xml" value="0.24322916666666666" />
         <entry key="app/src/main/res/layout/view_artist_detail.xml" value="0.21453900709219859" />
         <entry key="app/src/main/res/layout/view_release_detail.xml" value="0.24322916666666666" />
         <entry key="app/src/main/res/layout/view_release_list.xml" value="0.25" />

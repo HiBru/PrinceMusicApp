@@ -3,7 +3,7 @@ package de.hicedevelopments.princemusicapp.di.module
 import android.content.Context
 import androidx.room.Room
 import de.hicedevelopments.princemusicapp.data.local.PrinceDB
-import de.hicedevelopments.princemusicapp.data.local.dao.ResultDao
+import de.hicedevelopments.princemusicapp.data.local.dao.ReleaseDao
 import org.koin.dsl.module
 
 val databaseModule = module {
@@ -11,8 +11,8 @@ val databaseModule = module {
     single { providePrinceDB(get()) }
 }
 
-fun provideResultDao(db: PrinceDB): ResultDao {
-    return db.resultDao()
+fun provideResultDao(db: PrinceDB): ReleaseDao {
+    return db.releaseDao()
 }
 
 fun providePrinceDB(context: Context): PrinceDB {

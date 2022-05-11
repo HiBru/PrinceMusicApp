@@ -1,7 +1,11 @@
 package de.hicedevelopments.princemusicapp.app
 
 import android.app.Application
+import com.bumptech.glide.GlideBuilder
+import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.module.AppGlideModule
 import de.hicedevelopments.princemusicapp.BuildConfig
+import de.hicedevelopments.princemusicapp.common.GlideApp
 import de.hicedevelopments.princemusicapp.data.repository.repoModule
 import de.hicedevelopments.princemusicapp.di.module.*
 import org.koin.android.ext.koin.androidContext
@@ -29,5 +33,8 @@ class App : Application() {
             fragmentFactory()
             modules(appModules)
         }
+        initGlide()
     }
+
+    private fun initGlide() = GlideApp.get(this)
 }

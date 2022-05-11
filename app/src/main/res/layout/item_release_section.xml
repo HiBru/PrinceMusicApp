@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="section"
+            type="de.hicedevelopments.princemusicapp.ui.releaselist.items.ReleaseListSection" />
+    </data>
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/ReleaseSectionStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/release_section_bg"
+        android:paddingHorizontal="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:text="@{section.title}"
+        tools:text="2022"/>
+</layout>

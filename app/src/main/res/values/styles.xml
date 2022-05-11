@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ReleaseTitleStyle">
+        <item name="android:textColor">@color/gold_70</item>
+        <item name="android:textSize">@dimen/font_medium</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="ReleaseSectionStyle">
+        <item name="android:textColor">@color/gold_70</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:textSize">@dimen/font_xlarge</item>
+        <item name="android:textAlignment">viewEnd</item>
+    </style>
+
+</resources>

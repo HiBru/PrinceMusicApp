@@ -6,6 +6,8 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.view.WindowManager
 import android.view.animation.LinearInterpolator
+import androidx.navigation.Navigator
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import de.hicedevelopments.princemusicapp.R
 import de.hicedevelopments.princemusicapp.app.ResourceFragment
 import de.hicedevelopments.princemusicapp.app.extension.navigateUsingAction
@@ -24,7 +26,7 @@ class SplashScreen : ResourceFragment<ViewSplashBinding>() {
     override val viewModel: SplashViewModel by viewModel()
 
     override fun bindViewModel(binding: ViewSplashBinding) {
-        startIconAnimation()
+        //startIconAnimation()
         viewModel.results.observe(viewLifecycleOwner) {
             showToast("results completed")
             navigateToListScreen()
@@ -41,7 +43,10 @@ class SplashScreen : ResourceFragment<ViewSplashBinding>() {
         start()
     }
 
-    private fun navigateToListScreen() = navigateUsingAction(R.id.nav_splash_to_release_list)
+    private fun navigateToListScreen() =
+        navigateUsingAction(R.id.nav_splash_to_release_list,
+            FragmentNavigatorExtras(binding.imvIcon to "love_symbol")
+        )
 
     override fun onErrorMessageButtonClick(err: NetworkErr, dialog: DialogInterface) {
         super.onErrorMessageButtonClick(err, dialog)

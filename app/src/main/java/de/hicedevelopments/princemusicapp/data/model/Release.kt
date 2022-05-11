@@ -1,107 +1,38 @@
 package de.hicedevelopments.princemusicapp.data.model
 
-import android.provider.MediaStore
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "releases")
 data class Release(
-    @SerializedName("title")
-    @Expose
-    var title: String? = null,
     @SerializedName("id")
     @Expose
-    var id: Int = 0,
-    @SerializedName("artists")
+    @PrimaryKey
+    var id: Int,
+    @SerializedName("title")
     @Expose
-    var artists: List<Artist>? = null,
-    @SerializedName("data_quality")
+    var title: String?,
+    @SerializedName("type")
     @Expose
-    var dataQuality: String? = null,
-    @SerializedName("thumb")
+    var type: String?,
+    @SerializedName("main_release")
     @Expose
-    var thumb: String? = null,
-    @SerializedName("community")
+    var main_release: Int,
+    @SerializedName("artist")
     @Expose
-    var community: Community? = null,
-    @SerializedName("companies")
+    var artist: String?,
+    @SerializedName("role")
     @Expose
-    var companies: List<Company>? = null,
-    @SerializedName("country")
-    @Expose
-    var country: String? = null,
-    @SerializedName("date_added")
-    @Expose
-    var dateAdded: String? = null,
-    @SerializedName("date_changed")
-    @Expose
-    var dateChanged: String? = null,
-    @SerializedName("estimated_weight")
-    @Expose
-    var estimatedWeight: Int = 0,
-    @SerializedName("extraartists")
-    @Expose
-    var extraartists: List<Extraartist>? = null,
-    @SerializedName("format_quantity")
-    @Expose
-    var formatQuantity: Int = 0,
-    @SerializedName("formats")
-    @Expose
-    var formats: List<Format>? = null,
-    @SerializedName("genres")
-    @Expose
-    var genres: List<String>? = null,
-    @SerializedName("identifiers")
-    @Expose
-    var identifiers: List<Identifier>? = null,
-    @SerializedName("images")
-    @Expose
-    var images: List<Image>? = null,
-    @SerializedName("labels")
-    @Expose
-    var labels: List<Label>? = null,
-    @SerializedName("lowest_price")
-    @Expose
-    var lowestPrice: Double = 0.toDouble(),
-    @SerializedName("master_id")
-    @Expose
-    var masterId: Int = 0,
-    @SerializedName("master_url")
-    @Expose
-    var masterUrl: String? = null,
-    @SerializedName("notes")
-    @Expose
-    var notes: String? = null,
-    @SerializedName("num_for_sale")
-    @Expose
-    var numForSale: Int = 0,
-    @SerializedName("released")
-    @Expose
-    var released: String? = null,
-    @SerializedName("released_formatted")
-    @Expose
-    var releasedFormatted: String? = null,
+    var role: String?,
     @SerializedName("resource_url")
     @Expose
-    var resourceUrl: String? = null,
-    @SerializedName("series")
-    @Expose
-    var series: List<Any>? = null,
-    @SerializedName("status")
-    @Expose
-    var status: String? = null,
-    @SerializedName("styles")
-    @Expose
-    var styles: List<String>? = null,
-    @SerializedName("tracklist")
-    @Expose
-    var tracklist: List<Tracklist>? = null,
-    @SerializedName("uri")
-    @Expose
-    var uri: String? = null,
-    @SerializedName("videos")
-    @Expose
-    var videos: List<MediaStore.Video>? = null,
+    var resource_url: String?,
     @SerializedName("year")
     @Expose
-    var year: Int = 0
+    var year: Int,
+    @SerializedName("thumb")
+    @Expose
+    var thumb: String?
 )

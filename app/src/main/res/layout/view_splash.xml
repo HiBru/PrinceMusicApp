@@ -12,6 +12,7 @@
         android:background="@color/purple">
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imv_icon"
+            android:transitionName="love_symbol"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/prince_the_symbol_gold"
