@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <import type="de.hicedevelopments.princemusicapp.ui.releaselist.ReleaseListViewModel.ReleaseListEvent" />
         <variable
             name="viewModel"
             type="de.hicedevelopments.princemusicapp.ui.releaselist.ReleaseListViewModel" />
@@ -68,8 +69,20 @@
             app:itemBinding="@{viewModel.releasesItemBinding}"
             app:diffConfig="@{viewModel.releasesDiff}"
             app:addReleaseItemDecoration="@{true}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_release" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fb_scroll_to_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium"
+            android:backgroundTint="@color/gold_70"
+            app:layout_anchor="@id/releases"
+            app:layout_anchorGravity="bottom|end"
+            app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+            android:src="@drawable/ic_arrow_upward"
+            android:onClick="@{() -> viewModel.onEvent(ReleaseListEvent.SCROLL_TO_TOP)}"/>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

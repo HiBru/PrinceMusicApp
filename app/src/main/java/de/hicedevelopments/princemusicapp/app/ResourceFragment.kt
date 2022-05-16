@@ -4,11 +4,12 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import de.hicedevelopments.princemusicapp.app.extension.showAlert
 import de.hicedevelopments.princemusicapp.data.remote.NetworkErr
+import de.hicedevelopments.princemusicapp.data.remote.NetworkWrapper.State.NetworkError
+import de.hicedevelopments.princemusicapp.data.remote.NetworkWrapper.State.NotFoundError
 
 abstract class ResourceFragment<VB : ViewDataBinding> : BaseFragment() {
 
@@ -24,8 +25,8 @@ abstract class ResourceFragment<VB : ViewDataBinding> : BaseFragment() {
     open fun showLoading(isLoading: Boolean) = progressOverlay.show(isLoading)
     open fun onErrorMessageButtonClick(err: NetworkErr, dialog: DialogInterface) {
         Log.e("ERROR MESSAGE CLICK", err.toString())
-        when(err) {
-            NetworkErr.onNetworkError() -> onBackPressed()
+        when(err.errState) {
+            NetworkError, NotFoundError -> onBackPressed()
             else -> dialog.dismiss()
         }
     }

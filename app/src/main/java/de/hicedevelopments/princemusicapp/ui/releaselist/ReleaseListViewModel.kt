@@ -9,6 +9,7 @@ import de.hicedevelopments.princemusicapp.R
 import de.hicedevelopments.princemusicapp.app.BaseViewModel
 import de.hicedevelopments.princemusicapp.app.pagination.ReleasesDiff
 import de.hicedevelopments.princemusicapp.app.pagination.ReleasesSourceFactory
+import de.hicedevelopments.princemusicapp.common.SingleLiveEvent
 import de.hicedevelopments.princemusicapp.data.model.Release
 import de.hicedevelopments.princemusicapp.data.repository.Repo
 import de.hicedevelopments.princemusicapp.ui.releaselist.items.ReleaseListItem
@@ -24,7 +25,13 @@ class ReleaseListViewModel(
     private val repo: Repo
 ) : BaseViewModel() {
 
+    enum class ReleaseListEvent {
+        SCROLL_TO_TOP
+    }
+
     var itemClickListener: ReleaseListListener? = null
+
+    val eventStream = SingleLiveEvent<ReleaseListEvent>()
     val pagedReleases: LiveData<PagedList<ReleaseListRow>> by lazy {
         val pagingConfig = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
@@ -48,4 +55,6 @@ class ReleaseListViewModel(
         }
 
     }
+
+    fun onEvent(event: ReleaseListEvent) = eventStream.postValue(event)
 }

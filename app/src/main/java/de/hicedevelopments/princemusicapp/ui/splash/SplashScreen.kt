@@ -15,6 +15,8 @@ import de.hicedevelopments.princemusicapp.app.extension.navigateUsingDirections
 import de.hicedevelopments.princemusicapp.app.extension.showToast
 import de.hicedevelopments.princemusicapp.data.model.Result
 import de.hicedevelopments.princemusicapp.data.remote.NetworkErr
+import de.hicedevelopments.princemusicapp.data.remote.NetworkWrapper
+import de.hicedevelopments.princemusicapp.data.remote.NetworkWrapper.State.NetworkError
 import de.hicedevelopments.princemusicapp.databinding.ViewSplashBinding
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -26,9 +28,8 @@ class SplashScreen : ResourceFragment<ViewSplashBinding>() {
     override val viewModel: SplashViewModel by viewModel()
 
     override fun bindViewModel(binding: ViewSplashBinding) {
-        //startIconAnimation()
+        startIconAnimation()
         viewModel.results.observe(viewLifecycleOwner) {
-            showToast("results completed")
             navigateToListScreen()
         }
 
@@ -50,8 +51,8 @@ class SplashScreen : ResourceFragment<ViewSplashBinding>() {
 
     override fun onErrorMessageButtonClick(err: NetworkErr, dialog: DialogInterface) {
         super.onErrorMessageButtonClick(err, dialog)
-        when(err) {
-            NetworkErr.onNetworkError() -> finish()
+        when(err.errState) {
+            NetworkError -> finish()
             else -> dialog.dismiss()
         }
     }

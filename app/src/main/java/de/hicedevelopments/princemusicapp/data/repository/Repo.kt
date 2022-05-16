@@ -10,8 +10,6 @@ import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi.Companion.SEARC
 import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi.Companion.SEARCH_FORMAT
 import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi.Companion.SEARCH_SORT
 import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi.Companion.SEARCH_SORT_ORDER
-import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi.Companion.SEARCH_SUBTYPE
-import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi.Companion.SEARCH_TYPE
 import de.hicedevelopments.princemusicapp.data.remote.NetworkException
 import de.hicedevelopments.princemusicapp.data.remote.NetworkWrapper
 import de.hicedevelopments.princemusicapp.data.remote.NetworkWrapper.State.Success
@@ -33,12 +31,8 @@ class Repo(
 
     fun getReleases(perPage: Int, page: Int): Flow<Releases?> = flow {
         api.releases(hashMapOf(
-            //SEARCH_FORMAT to "album",
-            //SEARCH_COUNTRY to "Germany",
             SEARCH_SORT to "year",
             SEARCH_SORT_ORDER to "asc",
-            SEARCH_TYPE to "Releases",
-            SEARCH_SUBTYPE to "Albums",
             PER_PAGE to "$perPage",
             PAGE to "$page"
         )).let { response ->
@@ -49,11 +43,11 @@ class Repo(
                 }
             }
         }
-    }/*.onEach { releases ->
+    }.onEach { releases ->
         releases?.releases?.let {
-            insertReleases(it)
+            //insertReleases(it)
         }
-    }*/.flowOn(Dispatchers.IO)
+    }.flowOn(Dispatchers.IO)
 
     fun getAlbumList(perPage: Int, page: Int): Flow<Search?> = flow {
         api.search(hashMapOf(
@@ -97,7 +91,6 @@ class Repo(
     /**
      * RESULT DAO
      */
-    //private fun insertResults(items: List<Result>?) = releaseDao.insertAll(items)
     private fun insertReleases(items: List<Release>?) = releaseDao.insertAll(items)
     fun getResults(): Flow<List<Release>?> = releaseDao.getReleases()
 }
