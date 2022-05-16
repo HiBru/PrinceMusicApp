@@ -62,7 +62,9 @@ class ReleasesDataSource(
         val itemsWithSections = mutableListOf<ReleaseListRow>()
 
         groupedReleases.forEach { entry ->
-            itemsWithSections.add(ReleaseListSection("${entry.key}"))
+            if (entry.key > releaseYear) {
+                itemsWithSections.add(ReleaseListSection("${entry.key}"))
+            }
             itemsWithSections.addAll(entry.value.map { ReleaseListItem(it) })
         }
 
