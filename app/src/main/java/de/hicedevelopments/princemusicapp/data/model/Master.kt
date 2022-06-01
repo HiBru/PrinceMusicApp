@@ -1,6 +1,5 @@
 package de.hicedevelopments.princemusicapp.data.model
 
-import android.provider.MediaStore
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -100,7 +99,7 @@ data class Master(
     var uri: String? = null,
     @SerializedName("videos")
     @Expose
-    var videos: List<MediaStore.Video>? = null,
+    var videos: List<VideoLink>? = null,
     @SerializedName("year")
     @Expose
     var year: Int = 0

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/purple_75"/>
+            <padding
+                android:bottom="@dimen/padding_normal"
+                android:top="@dimen/padding_normal"
+                android:left="@dimen/padding_normal"
+                android:right="@dimen/padding_normal" />
+        </shape>
+    </item>
+    <item
+        android:drawable="@drawable/ic_back"
+        android:gravity="center" />
+</layer-list>

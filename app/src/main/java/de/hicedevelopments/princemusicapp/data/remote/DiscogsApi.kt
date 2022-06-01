@@ -32,6 +32,9 @@ interface DiscogsApi {
     @GET("releases/{release_id}")
     suspend fun release(@Path("release_id") releaseId: String): Response<Master>
 
+    @GET("masters/{master_id}")
+    suspend fun master(@Path("master_id") masterId: String): Response<Master>
+
     @GET("artists/28795")
     suspend fun getArtistsInfo(@Path("artist_id") artistId: String): Response<Artist>
 }

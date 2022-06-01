@@ -4,8 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
+            name="position"
+            type="Integer" />
+        <variable
             name="releaseItem"
             type="de.hicedevelopments.princemusicapp.ui.releaselist.items.ReleaseListItem" />
+        <variable
+            name="transitionName"
+            type="String" />
         <variable
             name="clickListener"
             type="de.hicedevelopments.princemusicapp.ui.releaselist.items.ReleaseListListener" />
@@ -18,7 +24,7 @@
         app:cardElevation="0dp"
         app:cardCornerRadius="@dimen/margin_normal"
         app:cardBackgroundColor="@android:color/transparent"
-        android:onClickListener="@{() -> clickListener.onReleaseItemClick(releaseItem)}">
+        android:onClickListener="@{() -> clickListener.onReleaseItemClick(position, releaseItem)}">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,12 +36,15 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent=".25" />
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imv_thumb"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:transitionName="@{transitionName}"
                 tools:background="@color/black"
                 android:background="@color/black"
                 android:scaleType="centerCrop"
                 app:imageUrl="@{releaseItem.thumb}"
+                app:showPlaceholder="@{true}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/image_gl"

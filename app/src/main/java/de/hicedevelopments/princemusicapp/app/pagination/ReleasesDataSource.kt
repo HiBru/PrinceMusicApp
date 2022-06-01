@@ -1,7 +1,9 @@
 package de.hicedevelopments.princemusicapp.app.pagination
 
+import android.util.Log
 import androidx.paging.PageKeyedDataSource
 import de.hicedevelopments.princemusicapp.data.model.Release
+import de.hicedevelopments.princemusicapp.data.remote.ErrorHandler
 import de.hicedevelopments.princemusicapp.data.repository.Repo
 import de.hicedevelopments.princemusicapp.ui.releaselist.items.ReleaseListItem
 import de.hicedevelopments.princemusicapp.ui.releaselist.items.ReleaseListRow
@@ -10,7 +12,8 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 
 class ReleasesDataSource(
-    val repo: Repo,
+    private val repo: Repo,
+    private val errorHandler: ErrorHandler,
     val isLoading: (isLoading: Boolean) -> Unit
 ) : PageKeyedDataSource<Int, ReleaseListRow>() {
 
@@ -57,9 +60,14 @@ class ReleasesDataSource(
 
     private fun List<Release>.mapToReleaseRows(): List<ReleaseListRow> {
         val groupedReleases = this
-            .filter { it.artist.equals("prince", true) && it.year >= releaseYear}
+            .filter {
+                it.artist?.contains("prince", true) ?: false
+                        && it.year >= releaseYear
+            }
             .groupBy { it.year }
         val itemsWithSections = mutableListOf<ReleaseListRow>()
+
+        if (groupedReleases.isEmpty()) return itemsWithSections
 
         groupedReleases.forEach { entry ->
             if (entry.key > releaseYear) {
@@ -68,7 +76,7 @@ class ReleasesDataSource(
             itemsWithSections.addAll(entry.value.map { ReleaseListItem(it) })
         }
 
-        releaseYear = last().year
+        releaseYear = groupedReleases.keys.last()
 
         return itemsWithSections
     }
@@ -76,8 +84,17 @@ class ReleasesDataSource(
     private fun runSave(bgFunction: suspend () -> Unit = {}) {
         isLoading(true)
         runBlocking {
-            bgFunction()
+            catchError { bgFunction() }
         }
         isLoading(false)
+    }
+
+    private suspend fun catchError(toGuard: suspend () -> Any) {
+        try {
+            toGuard()
+        } catch (e: Exception) {
+            Log.e("ASYNC ERROR", e.message.toString())
+            errorHandler.handleException(e)
+        }
     }
 }

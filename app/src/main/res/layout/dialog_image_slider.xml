@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="dialog"
+            type="de.hicedevelopments.princemusicapp.ui.releasedetail.imageslider.ImageSliderDialog" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:clipToPadding="false"
+            android:clipChildren="false"
+            android:padding="@dimen/padding_medium"
+            app:layout_constraintTop_toTopOf="parent"
+            app:itemBinding="@{dialog.imageBinding}"
+            app:items="@{dialog.images}"
+            app:offscreenPageLimit="@{1}"
+            app:usePageTransformer="@{true}"
+            tools:listitem="@layout/item_image_slide"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imv_minimize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_large"
+            android:onClick="@{() -> dialog.dismiss()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_close_fullscreen"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

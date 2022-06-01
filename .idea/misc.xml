@@ -4,13 +4,28 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.47962962962962963" />
+        <entry key="app/src/main/res/drawable/even_tracklist_item_bg.xml" value="0.209" />
         <entry key="app/src/main/res/drawable/ic_arrow_upward.xml" value="0.249" />
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.162" />
+        <entry key="app/src/main/res/drawable/ic_circular_back.xml" value="0.209" />
+        <entry key="app/src/main/res/drawable/ic_close_fullscreen.xml" value="0.249" />
+        <entry key="app/src/main/res/drawable/ic_play_video.xml" value="0.209" />
+        <entry key="app/src/main/res/drawable/ic_zoom_image.xml" value="0.249" />
+        <entry key="app/src/main/res/drawable/odd_tracklist_item_bg.xml" value="0.209" />
+        <entry key="app/src/main/res/drawable/release_detail_title_bg.xml" value="0.249" />
         <entry key="app/src/main/res/drawable/release_item_bg.xml" value="0.249" />
         <entry key="app/src/main/res/drawable/release_section_bg.xml" value="0.249" />
+        <entry key="app/src/main/res/drawable/release_video_item_bg.xml" value="0.209" />
+        <entry key="app/src/main/res/drawable/release_video_title_bg.xml" value="0.209" />
+        <entry key="app/src/main/res/drawable/tracklist_bg.xml" value="0.249" />
+        <entry key="app/src/main/res/drawable/tracklist_item_bg.xml" value="0.249" />
+        <entry key="app/src/main/res/layout/dialog_image_slider.xml" value="0.2015625" />
         <entry key="app/src/main/res/layout/dialog_progress.xml" value="0.4171195652173913" />
+        <entry key="app/src/main/res/layout/item_image_slide.xml" value="0.2015625" />
         <entry key="app/src/main/res/layout/item_release.xml" value="0.375" />
         <entry key="app/src/main/res/layout/item_release_section.xml" value="0.24322916666666666" />
+        <entry key="app/src/main/res/layout/item_tracklist.xml" value="0.24322916666666666" />
+        <entry key="app/src/main/res/layout/item_video.xml" value="0.2015625" />
         <entry key="app/src/main/res/layout/view_artist_detail.xml" value="0.21453900709219859" />
         <entry key="app/src/main/res/layout/view_release_detail.xml" value="0.24322916666666666" />
         <entry key="app/src/main/res/layout/view_release_list.xml" value="0.25" />

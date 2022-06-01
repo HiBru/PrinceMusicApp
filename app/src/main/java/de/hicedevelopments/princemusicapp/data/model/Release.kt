@@ -1,11 +1,14 @@
 package de.hicedevelopments.princemusicapp.data.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "releases")
+@Parcelize
 data class Release(
     @SerializedName("id")
     @Expose
@@ -35,4 +38,4 @@ data class Release(
     @SerializedName("thumb")
     @Expose
     var thumb: String?
-)
+) : Parcelable

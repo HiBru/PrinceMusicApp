@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.navigation.fragment.FragmentNavigator
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.transition.TransitionInflater
 import de.hicedevelopments.princemusicapp.R
 import de.hicedevelopments.princemusicapp.app.ResourceFragment
@@ -16,7 +19,7 @@ import de.hicedevelopments.princemusicapp.ui.releaselist.items.ReleaseListItem
 import de.hicedevelopments.princemusicapp.ui.releaselist.items.ReleaseListListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ReleaseListScreen : ResourceFragment<ViewReleaseListBinding>(), ReleaseListListener, View.OnScrollChangeListener {
+class ReleaseListScreen : ResourceFragment<ViewReleaseListBinding>(), ReleaseListListener, View.OnScrollChangeListener, SwipeRefreshLayout.OnRefreshListener {
 
     override var optionsMenu: Int? = R.menu.about_menu
     override val layoutId = R.layout.view_release_list
@@ -30,6 +33,19 @@ class ReleaseListScreen : ResourceFragment<ViewReleaseListBinding>(), ReleaseLis
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        postponeEnterTransition()
+        binding.releases.viewTreeObserver.addOnPreDrawListener {
+            startPostponedEnterTransition()
+            true
+        }
+    }
+
+    override fun showLoading(isLoading: Boolean) {
+        binding.refreshReleases.isRefreshing = isLoading
+    }
+
+    override fun onRefresh() {
+        viewModel.refresh()
     }
 
     override fun onScrollChange(view: View?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {
@@ -56,10 +72,16 @@ class ReleaseListScreen : ResourceFragment<ViewReleaseListBinding>(), ReleaseLis
         viewModel.eventStream.observe(viewLifecycleOwner) { event -> handleEvent(event) }
         binding.viewModel = viewModel
         binding.releases.setOnScrollChangeListener(this)
+        binding.refreshReleases.setOnRefreshListener(this)
     }
 
-    override fun onReleaseItemClick(item: ReleaseListItem) {
-        navigateToDetailScreen(item.id)
+    override fun onReleaseItemClick(position: Int, item: ReleaseListItem) {
+        binding.releases.layoutManager
+            ?.findViewByPosition(position)
+            ?.findViewById<AppCompatImageView>(R.id.imv_thumb)
+            ?.let { imageView ->
+                navigateToDetailScreen(imageView, item)
+            }
     }
 
     private fun handleEvent(event: ReleaseListViewModel.ReleaseListEvent) {
@@ -70,6 +92,9 @@ class ReleaseListScreen : ResourceFragment<ViewReleaseListBinding>(), ReleaseLis
 
     private fun scrollToTop() = binding.releases.scrollToPosition(0)
 
-    private fun navigateToDetailScreen(id: Int) = navigateUsingDirections(ReleaseListScreenDirections.navReleaseListToReleaseDetail(id.toString()))
+    private fun navigateToDetailScreen(imageView: AppCompatImageView, item: ReleaseListItem) = navigateUsingDirections(
+        ReleaseListScreenDirections.navReleaseListToReleaseDetail(item),
+        FragmentNavigator.Extras.Builder().addSharedElement(imageView, imageView.transitionName).build()
+    )
     private fun navigateToArtistDetail() = navigateUsingDirections(ReleaseListScreenDirections.navReleaseListToArtistDetail())
 }

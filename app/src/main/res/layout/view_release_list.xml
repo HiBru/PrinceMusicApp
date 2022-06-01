@@ -12,11 +12,9 @@
         android:id="@+id/coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="false"
-        android:background="@color/purple">
+        android:fitsSystemWindows="false">
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:backgroundTint="@color/purple"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -54,24 +52,28 @@
                     app:layout_collapseMode="pin"
                     app:menu="@menu/about_menu"
                     app:titleTextColor="@color/gold"
-                    app:title="@string/app_name"
+                    app:title="@string/releases"
                     app:layout_constraintTop_toTopOf="parent" />
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/releases"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refresh_releases"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:overScrollMode="never"
-            app:items="@{viewModel.pagedReleases}"
-            app:itemBinding="@{viewModel.releasesItemBinding}"
-            app:diffConfig="@{viewModel.releasesDiff}"
-            app:addReleaseItemDecoration="@{true}"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_release" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/releases"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:overScrollMode="ifContentScrolls"
+                app:items="@{viewModel.pagedReleases}"
+                app:itemBinding="@{viewModel.releasesItemBinding}"
+                app:diffConfig="@{viewModel.releasesDiff}"
+                app:addReleaseItemDecoration="@{true}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_release" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fb_scroll_to_top"
             android:layout_width="wrap_content"

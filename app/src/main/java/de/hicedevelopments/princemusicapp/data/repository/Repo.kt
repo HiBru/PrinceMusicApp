@@ -49,29 +49,17 @@ class Repo(
         }
     }.flowOn(Dispatchers.IO)
 
-    fun getAlbumList(perPage: Int, page: Int): Flow<Search?> = flow {
-        api.search(hashMapOf(
-            SEARCH_ARTIST to "Prince",
-            SEARCH_FORMAT to "album",
-            SEARCH_COUNTRY to "Germany",
-            SEARCH_SORT to "year",
-            SEARCH_SORT_ORDER to "asc",
-            PER_PAGE to "$perPage",
-            PAGE to "$page"
-        )).let { response ->
-            with(NetworkWrapper(response)) {
-                when (state) {
-                    Success -> emit(model)
-                    else -> throw NetworkException(state)
-                }
-            }
-        }
-    }.onEach {
-        //insertResults(it)
-    }.flowOn(Dispatchers.IO)
-
     fun getRelease(id: String): Flow<Master?> = flow {
         with(NetworkWrapper(api.release(id))) {
+            when(state) {
+                Success -> emit(model)
+                else -> throw NetworkException(state)
+            }
+        }
+    }.flowOn(Dispatchers.IO)
+
+    fun getMaster(id: String): Flow<Master?> = flow {
+        with(NetworkWrapper(api.master(id))) {
             when(state) {
                 Success -> emit(model)
                 else -> throw NetworkException(state)

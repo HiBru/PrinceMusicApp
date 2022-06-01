@@ -31,12 +31,24 @@
         android:name="de.hicedevelopments.princemusicapp.ui.releasedetail.ReleaseDetailScreen"
         tools:layout="@layout/view_release_detail">
         <argument
-            android:name="releaseId"
-            app:argType="string"/>
+            android:name="releaseItem"
+            app:argType="de.hicedevelopments.princemusicapp.ui.releaselist.items.ReleaseListItem" />
+        <action
+            android:id="@+id/nav_release_detail_to_image_slider_dialog"
+            app:destination="@+id/image_slider_dialog"/>
     </fragment>
     <fragment
         android:id="@+id/artist_detail"
         android:name="de.hicedevelopments.princemusicapp.ui.artistdetail.ArtistDetailScreen"
         tools:layout="@layout/view_artist_detail"/>
+
+    <dialog
+        android:id="@+id/image_slider_dialog"
+        android:name="de.hicedevelopments.princemusicapp.ui.releasedetail.imageslider.ImageSliderDialog"
+        tools:layout="@layout/dialog_image_slider">
+        <argument
+            android:name="images"
+            app:argType="de.hicedevelopments.princemusicapp.data.model.Image[]"/>
+    </dialog>
 
 </navigation>

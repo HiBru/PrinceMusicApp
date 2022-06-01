@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import de.hicedevelopments.princemusicapp.common.SingleLiveEvent
 import de.hicedevelopments.princemusicapp.data.remote.ErrorHandler
 import de.hicedevelopments.princemusicapp.data.remote.NetworkErr
 import de.hicedevelopments.princemusicapp.util.ConnectionHelper
@@ -17,7 +18,7 @@ abstract class BaseViewModel : ViewModel(), ErrorHandler, KoinComponent {
     override val connectionHelper: ConnectionHelper by inject()
 
     val isLoading = MutableLiveData<Boolean>()
-    val errorState = MutableLiveData<NetworkErr>()
+    val errorState = SingleLiveEvent<NetworkErr>()
 
     override fun onNetworkErr(err: NetworkErr) {
         errorState.postValue(err)

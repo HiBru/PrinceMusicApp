@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.WindowManager
 import android.view.animation.LinearInterpolator
 import androidx.navigation.Navigator
+import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import de.hicedevelopments.princemusicapp.R
 import de.hicedevelopments.princemusicapp.app.ResourceFragment
@@ -46,11 +47,10 @@ class SplashScreen : ResourceFragment<ViewSplashBinding>() {
 
     private fun navigateToListScreen() =
         navigateUsingAction(R.id.nav_splash_to_release_list,
-            FragmentNavigatorExtras(binding.imvIcon to "love_symbol")
+            FragmentNavigator.Extras.Builder().addSharedElement(binding.imvIcon, binding.imvIcon.transitionName).build()
         )
 
     override fun onErrorMessageButtonClick(err: NetworkErr, dialog: DialogInterface) {
-        super.onErrorMessageButtonClick(err, dialog)
         when(err.errState) {
             NetworkError -> finish()
             else -> dialog.dismiss()

@@ -25,10 +25,7 @@ abstract class ResourceFragment<VB : ViewDataBinding> : BaseFragment() {
     open fun showLoading(isLoading: Boolean) = progressOverlay.show(isLoading)
     open fun onErrorMessageButtonClick(err: NetworkErr, dialog: DialogInterface) {
         Log.e("ERROR MESSAGE CLICK", err.toString())
-        when(err.errState) {
-            NetworkError, NotFoundError -> onBackPressed()
-            else -> dialog.dismiss()
-        }
+        dialog.dismiss()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

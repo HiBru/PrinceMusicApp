@@ -31,4 +31,7 @@
     <dimen name="font_xxlarge">32sp</dimen>
     <dimen name="font_huge">48sp</dimen>
 
+    <!--    cardview radius -->
+    <dimen name="cardview_radius">16dp</dimen>
+
 </resources>

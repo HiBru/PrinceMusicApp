@@ -15,4 +15,15 @@
         <item name="android:textAlignment">viewEnd</item>
     </style>
 
+    <style name="Theme.MaterialComponents.Dialog.FullScreen" parent="Theme.MaterialComponents.Dialog">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@color/purple_75</item>
+    </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
 </resources>

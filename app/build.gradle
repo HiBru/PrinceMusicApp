@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -62,6 +63,7 @@ dependencies {
     //Binding adapter
     implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:$bindingcollectionadapterVersion"
     implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:$bindingcollectionadapterVersion"
+    implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-viewpager2:$bindingcollectionadapterVersion"
     implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-paging:$bindingcollectionadapterVersion"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 

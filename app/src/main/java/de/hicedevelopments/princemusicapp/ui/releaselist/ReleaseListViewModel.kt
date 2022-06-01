@@ -18,8 +18,9 @@ import de.hicedevelopments.princemusicapp.ui.releaselist.items.ReleaseListRow
 import de.hicedevelopments.princemusicapp.ui.releaselist.items.ReleaseListSection
 import me.tatarka.bindingcollectionadapter2.OnItemBind
 
+const val INITIAL_LOAD_SIZE = 50
 const val PAGINATION_PAGE_SIZE = 50
-const val PAGINATION_PREFETCH = 10
+const val PAGINATION_PREFETCH = 25
 
 class ReleaseListViewModel(
     private val repo: Repo
@@ -34,12 +35,12 @@ class ReleaseListViewModel(
     val eventStream = SingleLiveEvent<ReleaseListEvent>()
     val pagedReleases: LiveData<PagedList<ReleaseListRow>> by lazy {
         val pagingConfig = PagedList.Config.Builder()
-            .setEnablePlaceholders(false)
-            .setInitialLoadSizeHint(PAGINATION_PAGE_SIZE)
+            .setEnablePlaceholders(true)
+            .setInitialLoadSizeHint(INITIAL_LOAD_SIZE)
             .setPageSize(PAGINATION_PAGE_SIZE)
             .setPrefetchDistance(PAGINATION_PREFETCH)
             .build()
-        val sourceFactory = ReleasesSourceFactory(repo) { loading -> isLoading.postValue(loading) }
+        val sourceFactory = ReleasesSourceFactory(repo, this) { loading -> isLoading.postValue(loading) }
         LivePagedListBuilder(sourceFactory, pagingConfig).build()
     }
     val releasesDiff: DiffUtil.ItemCallback<ReleaseListRow> = ReleasesDiff()
@@ -47,6 +48,8 @@ class ReleaseListViewModel(
         when(item) {
             is ReleaseListItem -> {
                 itemBinding.set(BR.releaseItem, R.layout.item_release)
+                itemBinding.bindExtra(BR.position, position)
+                itemBinding.bindExtra(BR.transitionName, "${item.id}")
                 itemBinding.bindExtra(BR.clickListener, itemClickListener)
             }
             is ReleaseListSection -> {
@@ -55,6 +58,8 @@ class ReleaseListViewModel(
         }
 
     }
+
+    fun refresh() = pagedReleases.value?.dataSource?.invalidate()
 
     fun onEvent(event: ReleaseListEvent) = eventStream.postValue(event)
 }
