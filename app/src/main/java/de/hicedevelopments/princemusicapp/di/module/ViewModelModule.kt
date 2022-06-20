@@ -11,5 +11,5 @@ val viewModelModule = module {
     viewModel { SplashViewModel(get()) }
     viewModel { ReleaseListViewModel(get()) }
     viewModel { ReleaseDetailViewModel(get()) }
-    viewModel { ArtistDetailViewModel() }
+    viewModel { ArtistDetailViewModel(get()) }
 }

@@ -20,6 +20,25 @@
     <string name="master_toolbar_title">%1$s (%2$d)</string>
     <string name="releases">Veröffentlichungen</string>
 
+    <!--    Artist Detail Screen    -->
+    <string name="artist_real_name">Bürgerlicher Name</string>
+    <string name="artist_profile">Profil</string>
+    <string name="artist_urls">Links</string>
+    <string name="artist_name_variations">Varianten</string>
+    <string name="artist_about">American singer, musician, songwriter, composer, arranger, sound engineer, producer, actor, dancer.
+        Frontman of Prince And The Revolution (from 1984 to 1986).
+        And from 1991 onwards he was Leader of the New Power Generation (which evolved the line-up almost every year) until his passing in 2016.
+        Prince was inducted into the Rock And Roll Hall of Fame in 2004.
+        \n\nBorn: 7 June 1958 in Minneapolis, Minnesota, USA.
+        \nDied: 21 April 2016 in Chanhassen, Minnesota, USA.
+        \n\nFrom 1986 to 1994 he ran Paisley Park and subsequently NPG Records resulting from his high profile disputes with Warner Bros. Records.
+        Prince also had distribution of his music via various websites like NPG Music Club, lotusflow3r.com, 3rdeyegirl.com, and 3rdeyetunes.com.
+        He was also supporter of Tidal (3), with exclusives being made available on the platform sporadically.
+        \n\nSon of pianist and songwriter John L. Nelson, brother of Tyka Nelson (sister) &amp; Sharon Nelson (half-sister) was famous additionally for his work in the band Prince And The Revolution.
+        \n\nPrince was married to Mayte (from 1996 to 2000) and to Manuela Testolini (from 2001 to 2006).
+        He owned Paisley Park Studios where he spent so much time that it can be said that he lived in it, the doves Divinity And Majesty were his fellow residents."
+    </string>
+
     <plurals name="videos">
         <item quantity="one">Video</item>
         <item quantity="other">Videos</item>

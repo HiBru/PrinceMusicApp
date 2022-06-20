@@ -1,5 +1,6 @@
 package de.hicedevelopments.princemusicapp.data.repository
 
+import de.hicedevelopments.princemusicapp.data.local.dao.ArtistInfoDao
 import de.hicedevelopments.princemusicapp.data.local.dao.ReleaseDao
 import de.hicedevelopments.princemusicapp.data.model.*
 import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi
@@ -14,19 +15,17 @@ import de.hicedevelopments.princemusicapp.data.remote.NetworkException
 import de.hicedevelopments.princemusicapp.data.remote.NetworkWrapper
 import de.hicedevelopments.princemusicapp.data.remote.NetworkWrapper.State.Success
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import org.koin.dsl.module
 
 val repoModule = module {
-    single { Repo(get(), get()) }
+    single { Repo(get(), get(), get()) }
 }
 
 class Repo(
     private val api: DiscogsApi,
-    private val releaseDao: ReleaseDao
+    private val releaseDao: ReleaseDao,
+    private val artistInfoDao: ArtistInfoDao
 ) {
 
     fun getReleases(perPage: Int, page: Int): Flow<Releases?> = flow {
@@ -67,18 +66,29 @@ class Repo(
         }
     }.flowOn(Dispatchers.IO)
 
-    fun getArtistInfo(id: String): Flow<Artist?> = flow {
-        with(NetworkWrapper(api.getArtistsInfo(id))) {
+    fun getArtistInfo(): Flow<ArtistInfo?> = flow {
+        getLocaleArtistInfo()?.let { info ->
+            emit(info)
+        } ?: with(NetworkWrapper(api.getArtistsInfo())) {
             when(state) {
-                Success -> emit(model)
+                Success -> {
+                    insertArtistInfo(model)
+                    emit(getLocaleArtistInfo())
+                }
                 else -> throw NetworkException(state)
             }
         }
     }.flowOn(Dispatchers.IO)
 
     /**
-     * RESULT DAO
+     * RELEASE DAO
      */
     private fun insertReleases(items: List<Release>?) = releaseDao.insertAll(items)
     fun getResults(): Flow<List<Release>?> = releaseDao.getReleases()
+
+    /**
+     * ARTIST INFO DAO
+     */
+    private fun insertArtistInfo(info: ArtistInfo?) = artistInfoDao.insert(info)
+    private fun getLocaleArtistInfo(): ArtistInfo? = artistInfoDao.getArtistInfo()
 }

@@ -1,9 +1,6 @@
 package de.hicedevelopments.princemusicapp.data.remote
 
-import de.hicedevelopments.princemusicapp.data.model.Artist
-import de.hicedevelopments.princemusicapp.data.model.Master
-import de.hicedevelopments.princemusicapp.data.model.Releases
-import de.hicedevelopments.princemusicapp.data.model.Search
+import de.hicedevelopments.princemusicapp.data.model.*
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -36,5 +33,5 @@ interface DiscogsApi {
     suspend fun master(@Path("master_id") masterId: String): Response<Master>
 
     @GET("artists/28795")
-    suspend fun getArtistsInfo(@Path("artist_id") artistId: String): Response<Artist>
+    suspend fun getArtistsInfo(): Response<ArtistInfo>
 }

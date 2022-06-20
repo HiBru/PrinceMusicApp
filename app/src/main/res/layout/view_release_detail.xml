@@ -47,7 +47,6 @@
                         android:transitionName="@{transitionName}"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
                         app:imageUrl="@{viewModel.detailItem == null ? thumb : viewModel.detailItem.images.get(0).uri}"
                         app:showPlaceholder="@{thumb.empty}"
@@ -143,7 +142,7 @@
                         android:textSize="@dimen/font_large"
                         android:textColor="@color/gold_70"
                         android:textStyle="bold"
-                        app:plurals="@{viewModel.detailItem.videos == null ? null : viewModel.detailItem.videos}"
+                        android:text="@{@plurals/videos(viewModel.detailItem.videos.size)}"
                         tools:text="Videos"/>
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
