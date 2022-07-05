@@ -12,10 +12,11 @@
         android:id="@+id/coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="false">
+        android:background="@color/purple">
         <com.google.android.material.appbar.AppBarLayout
+            android:theme="@style/Widget.AppTheme.AppBar"
             android:id="@+id/appbar"
-            android:backgroundTint="@color/purple"
+            android:background="@color/purple"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.google.android.material.appbar.CollapsingToolbarLayout

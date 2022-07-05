@@ -4,8 +4,10 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import de.hicedevelopments.princemusicapp.R
 import de.hicedevelopments.princemusicapp.app.extension.showAlert
 import de.hicedevelopments.princemusicapp.data.remote.NetworkErr
 import de.hicedevelopments.princemusicapp.data.remote.NetworkWrapper.State.NetworkError
@@ -53,6 +55,15 @@ abstract class ResourceFragment<VB : ViewDataBinding> : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         bindViewModel(binding)
         bindObserver()
+        binding.root.setOnApplyWindowInsetsListener { view, insets ->
+            val toolbar: Toolbar? = view.findViewById(R.id.toolbar)
+            if (toolbar != null) {
+                val layoutParams: ViewGroup.MarginLayoutParams = toolbar?.layoutParams as ViewGroup.MarginLayoutParams
+                layoutParams.setMargins(0, insets.systemWindowInsetTop, 0, 0)
+                toolbar.layoutParams = layoutParams
+            }
+            insets.consumeSystemWindowInsets()
+        }
     }
 
     private fun bindObserver() {

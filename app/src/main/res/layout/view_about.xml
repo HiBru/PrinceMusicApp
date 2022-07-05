@@ -4,20 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <import type="android.view.View"/>
-        <import type="de.hicedevelopments.princemusicapp.ui.artistdetail.ArtistDetailViewModel.ArtistDetailEvent"/>
+        <import type="de.hicedevelopments.princemusicapp.ui.about.AboutViewModel.AboutEvent"/>
         <variable
             name="viewModel"
-            type="de.hicedevelopments.princemusicapp.ui.artistdetail.ArtistDetailViewModel" />
+            type="de.hicedevelopments.princemusicapp.ui.about.AboutViewModel" />
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="false">
+        android:background="@color/purple">
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:backgroundTint="@color/purple"
+            android:theme="@style/Widget.AppTheme.AppBar"
+            android:background="@color/status_bar_scrim"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -26,9 +26,11 @@
                 android:layout_height="match_parent"
                 app:contentScrim="@color/purple"
                 app:expandedTitleGravity="bottom"
-                app:expandedTitleTextColor="@android:color/transparent"
+                app:expandedTitleTextColor="@color/gold_70"
+                app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Headline"
                 app:collapsedTitleTextColor="@color/gold"
-                app:title="@{viewModel.artistInfo.name}"
+                app:title="@{viewModel.aboutModel.title}"
+                tools:title="Artist name"
                 app:titleCollapseMode="fade"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,40 +43,27 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:scaleType="centerCrop"
-                        app:imageUrl="@{viewModel.artistInfo.images.get(0).uri}"
-                        app:showPlaceholder="@{true}"
+                        app:imageUrl="@{viewModel.aboutModel.images.get(0).uri}"
+                        app:showPlaceholder="@{false}"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintDimensionRatio="H, 1:1"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="@{() -> viewModel.onEvent(ArtistDetailEvent.IMAGE_CLICK)}">
-                    <androidx.appcompat.widget.LinearLayoutCompat
+                    android:onClick="@{() -> viewModel.onEvent(AboutEvent.IMAGE_CLICK)}">
+                    <View
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         app:layout_constraintDimensionRatio="H, 1:1"
-                        android:gravity="bottom"
-                        android:padding="@dimen/padding_large"
                         android:background="@drawable/release_detail_title_bg"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:orientation="vertical">
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:visibility="@{viewModel.artistInfo == null ? View.GONE : View.VISIBLE}"
-                            android:textSize="@dimen/font_large"
-                            android:textColor="@color/gold_70"
-                            android:textStyle="bold"
-                            android:text="@{viewModel.artistInfo.name}"
-                            tools:text="Artist name" />
-                    </androidx.appcompat.widget.LinearLayoutCompat>
+                        app:layout_constraintBottom_toBottomOf="parent"/>
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/imv_zoom"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin_large"
-                        android:visibility="@{viewModel.artistInfo.images.size() > 1 ? View.VISIBLE : View.GONE}"
+                        android:visibility="@{viewModel.aboutModel.images.size() > 1 ? View.VISIBLE : View.GONE}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:src="@drawable/ic_zoom_image" />
@@ -105,7 +94,7 @@
                     android:paddingBottom="@dimen/padding_normal"
                     app:layout_constraintTop_toTopOf="parent"
                     android:orientation="vertical"
-                    android:visibility="@{viewModel.artistInfo.realName == null ? View.GONE : View.VISIBLE}">
+                    android:visibility="@{viewModel.aboutModel.realName == null ? View.GONE : View.VISIBLE}">
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -116,7 +105,7 @@
                         android:textColor="@color/gold_70"
                         android:textStyle="bold"
                         android:lineSpacingExtra="0sp"
-                        android:text="@string/artist_real_name"/>
+                        android:text="@string/about_real_name"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -124,7 +113,7 @@
                         android:layout_marginHorizontal="@dimen/padding_medium"
                         android:textSize="@dimen/font_normal"
                         android:textColor="@color/white"
-                        android:text="@{viewModel.artistInfo.realName}"
+                        android:text="@{viewModel.aboutModel.realName}"
                         tools:text="artist real name"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -133,7 +122,7 @@
                     android:paddingBottom="@dimen/padding_normal"
                     app:layout_constraintTop_toTopOf="parent"
                     android:orientation="vertical"
-                    android:visibility="@{viewModel.artistInfo.realName == null ? View.GONE : View.VISIBLE}">
+                    android:visibility="@{viewModel.aboutModel.realName == null ? View.GONE : View.VISIBLE}">
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -144,7 +133,7 @@
                         android:textColor="@color/gold_70"
                         android:textStyle="bold"
                         android:lineSpacingExtra="0sp"
-                        android:text="@string/artist_name_variations"/>
+                        android:text="@string/about_name_variations"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -152,8 +141,8 @@
                         android:layout_marginHorizontal="@dimen/padding_medium"
                         android:textSize="@dimen/font_normal"
                         android:textColor="@color/white"
-                        app:textList="@{viewModel.artistInfo.nameVariations}"
-                        tools:text="artist real name"/>
+                        app:textList="@{viewModel.aboutModel.nameVariations}"
+                        tools:text="artist name variants"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -161,7 +150,7 @@
                     android:paddingBottom="@dimen/padding_normal"
                     app:layout_constraintTop_toTopOf="parent"
                     android:orientation="vertical"
-                    android:visibility="@{viewModel.artistInfo.profile == null ? View.GONE : View.VISIBLE}">
+                    android:visibility="@{viewModel.aboutModel.profile == null ? View.GONE : View.VISIBLE}">
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -171,7 +160,7 @@
                         android:textSize="@dimen/font_large"
                         android:textColor="@color/gold_70"
                         android:textStyle="bold"
-                        android:text="@string/artist_profile"/>
+                        android:text="@string/about_profile"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -179,7 +168,7 @@
                         android:paddingHorizontal="@dimen/padding_medium"
                         android:textSize="@dimen/font_normal"
                         android:textColor="@color/white"
-                        android:text="@string/artist_about"
+                        android:text="@{viewModel.aboutModel.profile}"
                         tools:text="artist profile"/>
                 </androidx.appcompat.widget.LinearLayoutCompat><androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -187,7 +176,7 @@
                 android:paddingBottom="@dimen/padding_normal"
                 app:layout_constraintTop_toTopOf="parent"
                 android:orientation="vertical"
-                android:visibility="@{viewModel.artistInfo.urls == null ? View.GONE : View.VISIBLE}">
+                android:visibility="@{viewModel.aboutModel.links == null ? View.GONE : View.VISIBLE}">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -197,20 +186,15 @@
                     android:textSize="@dimen/font_large"
                     android:textColor="@color/gold_70"
                     android:textStyle="bold"
-                    android:text="@string/artist_urls"/>
-                <TextView
+                    android:text="@string/about_urls"/>
+                <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/margin_normal"
-                    android:paddingHorizontal="@dimen/padding_medium"
-                    android:textSize="@dimen/font_normal"
-                    android:textColor="@color/white"
-                    android:lineSpacingExtra="@dimen/font_normal"
-                    android:autoLink="web"
-                    android:textColorLink="@color/white"
-                    app:textList="@{viewModel.artistInfo.urls}"
-                    app:separator="@{String.valueOf('\n')}"
-                    tools:text="artist profile"/>
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:items="@{viewModel.aboutModel.links}"
+                    app:itemBinding="@{viewModel.webLinkBinding}"
+                    tools:listitem="@layout/item_weblink"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.core.widget.NestedScrollView>

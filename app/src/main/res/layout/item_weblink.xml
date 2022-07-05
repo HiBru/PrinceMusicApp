@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="webLink"
+            type="de.hicedevelopments.princemusicapp.data.model.WebLink" />
+        <variable
+            name="clickListener"
+            type="de.hicedevelopments.princemusicapp.data.model.WebLinkListener" />
+    </data>
+    <TextView
+        android:id="@+id/test_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/margin_normal"
+        android:paddingHorizontal="@dimen/padding_medium"
+        android:textSize="@dimen/font_normal"
+        android:textColor="@color/gold"
+        android:lineSpacingExtra="@dimen/font_normal"
+        android:textColorLink="@color/gold"
+        android:text="@{webLink.text != null ? webLink.text : webLink.link}"
+        app:enableLinkMovement="@{true}"
+        tools:text="test link"
+        android:onClick="@{() -> clickListener.onWebLinkClick(webLink)}"/>
+</layout>

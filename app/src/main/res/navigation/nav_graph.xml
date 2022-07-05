@@ -23,8 +23,15 @@
             android:id="@+id/nav_release_list_to_release_detail"
             app:destination="@id/release_detail"/>
         <action
-            android:id="@+id/nav_release_list_to_artist_detail"
-            app:destination="@id/artist_detail"
+            android:id="@+id/nav_release_list_to_about"
+            app:destination="@id/about"
+            app:enterAnim="@android:anim/fade_in"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popExitAnim="@android:anim/fade_out"/>
+        <action
+            android:id="@+id/nav_release_list_to_about_me"
+            app:destination="@id/about_me"
             app:enterAnim="@android:anim/fade_in"
             app:popEnterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
@@ -42,9 +49,12 @@
             app:destination="@+id/image_slider_dialog"/>
     </fragment>
     <fragment
-        android:id="@+id/artist_detail"
-        android:name="de.hicedevelopments.princemusicapp.ui.artistdetail.ArtistDetailScreen"
-        tools:layout="@layout/view_artist_detail">
+        android:id="@+id/about"
+        android:name="de.hicedevelopments.princemusicapp.ui.about.AboutScreen"
+        tools:layout="@layout/view_about">
+        <argument
+            android:name="type"
+            app:argType="de.hicedevelopments.princemusicapp.data.model.AboutType"/>
         <action
             android:id="@+id/nav_artist_detail_to_image_slider_dialog"
             app:destination="@id/image_slider_dialog" />

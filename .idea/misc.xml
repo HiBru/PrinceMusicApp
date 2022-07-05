@@ -26,6 +26,9 @@
         <entry key="app/src/main/res/layout/item_release_section.xml" value="0.24322916666666666" />
         <entry key="app/src/main/res/layout/item_tracklist.xml" value="0.24322916666666666" />
         <entry key="app/src/main/res/layout/item_video.xml" value="0.2015625" />
+        <entry key="app/src/main/res/layout/item_weblink.xml" value="0.18489583333333334" />
+        <entry key="app/src/main/res/layout/view_about.xml" value="0.27943840579710144" />
+        <entry key="app/src/main/res/layout/view_about_me.xml" value="0.27943840579710144" />
         <entry key="app/src/main/res/layout/view_artist_detail.xml" value="0.21453900709219859" />
         <entry key="app/src/main/res/layout/view_release_detail.xml" value="0.24322916666666666" />
         <entry key="app/src/main/res/layout/view_release_list.xml" value="0.25" />

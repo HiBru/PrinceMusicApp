@@ -23,6 +23,6 @@ fun Fragment.startActivitySafely(intent: Intent) {
     try {
         startActivity(intent)
     } catch (exception: ActivityNotFoundException) {
-        Log.w("HIGHERSELF", "Could not find activity to handle intent: $intent")
+        Log.w("PRINCE MUSIC APP", "Could not find activity to handle intent: $intent")
     }
 }

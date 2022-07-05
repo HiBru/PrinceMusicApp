@@ -3,23 +3,20 @@ package de.hicedevelopments.princemusicapp.data.local
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import de.hicedevelopments.princemusicapp.data.local.dao.ArtistInfoDao
+import de.hicedevelopments.princemusicapp.data.local.dao.AboutDao
 import de.hicedevelopments.princemusicapp.data.local.dao.ReleaseDao
-import de.hicedevelopments.princemusicapp.data.model.ArtistInfo
-import de.hicedevelopments.princemusicapp.data.model.Community
-import de.hicedevelopments.princemusicapp.data.model.Release
-import de.hicedevelopments.princemusicapp.data.model.Result
+import de.hicedevelopments.princemusicapp.data.model.*
 
 @Database(
     entities = [
         Release::class,
-        ArtistInfo::class
+        About::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
 abstract class PrinceDB : RoomDatabase() {
     abstract fun releaseDao(): ReleaseDao
-    abstract fun artistInfoDao(): ArtistInfoDao
+    abstract fun aboutDao(): AboutDao
 }

@@ -17,15 +17,21 @@
     <string name="unknown_error_title">Unbekannter Fehler</string>
     <string name="unknown_error_desc">Es ist ein unbekannter Fehler aufgetreten.</string>
 
-    <string name="master_toolbar_title">%1$s (%2$d)</string>
-    <string name="releases">Veröffentlichungen</string>
+    <!--    Menu    -->
+    <string name="menu_about_prince">About Prince</string>
+    <string name="menu_about_me">About Me</string>
 
-    <!--    Artist Detail Screen    -->
-    <string name="artist_real_name">Bürgerlicher Name</string>
-    <string name="artist_profile">Profil</string>
-    <string name="artist_urls">Links</string>
-    <string name="artist_name_variations">Varianten</string>
-    <string name="artist_about">American singer, musician, songwriter, composer, arranger, sound engineer, producer, actor, dancer.
+    <!--    Release Detail Screen   -->
+    <string name="release_toolbar_title">%1$s (%2$d)</string>
+    <string name="releases">Releases</string>
+
+    <!--    About Screen    -->
+    <string name="about_real_name">Real name</string>
+    <string name="about_profile">Profile</string>
+    <string name="about_urls">Links</string>
+    <string name="about_name_variations">Name Variants</string>
+    <string name="about_prince_title">About Prince</string>
+    <string name="about_artist">American singer, musician, songwriter, composer, arranger, sound engineer, producer, actor, dancer.
         Frontman of Prince And The Revolution (from 1984 to 1986).
         And from 1991 onwards he was Leader of the New Power Generation (which evolved the line-up almost every year) until his passing in 2016.
         Prince was inducted into the Rock And Roll Hall of Fame in 2004.
@@ -38,7 +44,43 @@
         \n\nPrince was married to Mayte (from 1996 to 2000) and to Manuela Testolini (from 2001 to 2006).
         He owned Paisley Park Studios where he spent so much time that it can be said that he lived in it, the doves Divinity And Majesty were his fellow residents."
     </string>
+    <string name="about_me_title">About Me</string>
+    <string name="about_me_real_name">Sebastian Martin Michael Hinz</string>
+    <string-array name="about_me_name_variations">
+        <item>Hinz</item>
+        <item>Hinzi</item>
+        <item>HiBru</item>
+        <item>Sebastian</item>
+        <item>Basti</item>
+    </string-array>
+    <string name="about_me">Geboren und aufgewachsen in Berlin, hatte ich schon von klein auf Interesse an technischen Geräten, insbesondere Computer und deren Peripherie. Zunächst war ich von der Hardware angetan, doch nach und nach wuchs meine Begeisterung auch für die Software dahinter. Daher entschied ich mich, nach dem Abitur, eine Informatik-Laufbahn einzuschlagen.
+\n\nMein erstes Studium war das der angewandten Informatik, doch bemerkte ich nach einigen Semestern, dass meine eigentliche Leidenschaft die mobile Entwicklung war. Daher wechselte ich die Hochschule und machte meinen Bachelor in Medieninformatik.
+\n\nWährend des Studiums spezialisierte ich mich auf die Android App-Entwicklung und informierte mich stets über die neuesten Technologien. Mein erstes Praktikum absolvierte ich bei apparent media, dort bekam ich bereits erste Einblicke in meinen zukünftigen Beruf. Nach erfolgreichem Abschluss arbeitete ich dann bis 2021 bei apprime. Dort vertiefte ich mein Wissen, insbesondere was die Programmiersprache Kotlin angeht.
+\n\nDa ich nach 6 Jahren bei apprime jedoch das Gefühl hatte, dort an meine ausbilderischen Grenzen gestoßen zu sein, entschied ich mich aufzuhören und verband dies mit einer kreativen Auszeit. In diesem Zeitraum konzentrierte ich mich auf meine körperliche und mentale Gesundheit, beschäftigte mich mit gesunder Ernährung und entdeckte neue Sportarten. Natürlich vernachlässigte ich dabei nicht die Entwicklungen der App-Programmierung und erstellte in meiner Freizeit u.a. diese App.
+\n\nPerspektivisch würde ich in meinem neuen Job gerne tieferführendes Wissen über die Automatisierung von Prozessen (CI/CD), sowie die Erstellung deklarativer UIs mit Jetpack Compose gewinnen und mich zu gegebener Zeit auch in neue Gefilde begeben, wie beispielsweise das Projektmanagement.
+\n\nZurzeit lebe ich mit meiner Freundin, unserem Hund Morty und Kater Gustl in Berlin.
+\n\nIn meiner Freizeit beschäftige ich mich mit Smart-Home-Installationen, Neuerungen in der Welt der Technik, gehe leidenschaftlich gern Laufen und Bouldern.
+    </string>
+    <string-array name="about_me_images">
+        <item>http://hice-developments.de/prince_music_app/about_me/me_01.jpg</item>
+        <item>http://hice-developments.de/prince_music_app/about_me/me_02.jpg</item>
+        <item>http://hice-developments.de/prince_music_app/about_me/me_03.jpg</item>
+        <item>http://hice-developments.de/prince_music_app/about_me/me_04.jpg</item>
+        <item>http://hice-developments.de/prince_music_app/about_me/me_05.jpg</item>
+        <item>http://hice-developments.de/prince_music_app/about_me/me_06.jpg</item>
+        <item>http://hice-developments.de/prince_music_app/about_me/me_07.jpg</item>
+        <item>http://hice-developments.de/prince_music_app/about_me/me_08.jpg</item>
+        <item>http://hice-developments.de/prince_music_app/about_me/me_09.jpg</item>
+    </string-array>
+    <string name="defshop_link">https://play.google.com/store/apps/details?id=com.defshop.app.android&amp;gl=DE</string>
+    <string name="dlr_moving_lab_link">https://play.google.com/store/apps/details?id=de.dlr.movinglab.android&amp;gl=DE</string>
+    <string name="higher_self_link">https://play.google.com/store/apps/details?id=com.lauraseiler.higherself&amp;gl=DE</string>
+    <string name="fitx_link">https://play.google.com/store/apps/details?id=de.fitx.membersapp&amp;gl=DE</string>
+    <string name="premium_link">https://play.google.com/store/apps/details?id=com.premiumexhibitions.premium&amp;gl=DE</string>
+    <string name="bpa_link">https://play.google.com/store/apps/details?id=de.bund.bpa.besucherdienst&amp;gl=DE</string>
 
+
+    <!--    Plurals -->
     <plurals name="videos">
         <item quantity="one">Video</item>
         <item quantity="other">Videos</item>

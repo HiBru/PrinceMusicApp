@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b643a800-5daa-430f-8830-46eb1b2b2486" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/de/hicedevelopments/princemusicapp/ui/aboutme/AboutMeScreen.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/de/hicedevelopments/princemusicapp/ui/aboutme/AboutMeViewModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/layout/view_about_me.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hicedevelopments/princemusicapp/di/module/FragmentModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hicedevelopments/princemusicapp/di/module/FragmentModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hicedevelopments/princemusicapp/di/module/ViewModelModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hicedevelopments/princemusicapp/di/module/ViewModelModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hicedevelopments/princemusicapp/ui/artistdetail/ArtistDetailScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hicedevelopments/princemusicapp/ui/artistdetail/AboutScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hicedevelopments/princemusicapp/ui/artistdetail/ArtistDetailViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hicedevelopments/princemusicapp/ui/artistdetail/ArtistDetailViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hicedevelopments/princemusicapp/ui/releaselist/ReleaseListScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hicedevelopments/princemusicapp/ui/releaselist/ReleaseListScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/view_artist_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/view_artist_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/view_release_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/view_release_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/menu/about_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/menu/about_menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/navigation/nav_graph.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/navigation/nav_graph.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values/strings.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+</project>

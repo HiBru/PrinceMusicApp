@@ -1,31 +1,34 @@
 package de.hicedevelopments.princemusicapp.data.repository
 
-import de.hicedevelopments.princemusicapp.data.local.dao.ArtistInfoDao
+import android.content.Context
+import de.hicedevelopments.princemusicapp.R
+import de.hicedevelopments.princemusicapp.data.local.dao.AboutDao
 import de.hicedevelopments.princemusicapp.data.local.dao.ReleaseDao
 import de.hicedevelopments.princemusicapp.data.model.*
 import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi
 import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi.Companion.PAGE
 import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi.Companion.PER_PAGE
-import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi.Companion.SEARCH_ARTIST
-import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi.Companion.SEARCH_COUNTRY
-import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi.Companion.SEARCH_FORMAT
 import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi.Companion.SEARCH_SORT
 import de.hicedevelopments.princemusicapp.data.remote.DiscogsApi.Companion.SEARCH_SORT_ORDER
 import de.hicedevelopments.princemusicapp.data.remote.NetworkException
 import de.hicedevelopments.princemusicapp.data.remote.NetworkWrapper
 import de.hicedevelopments.princemusicapp.data.remote.NetworkWrapper.State.Success
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.onEach
 import org.koin.dsl.module
 
 val repoModule = module {
-    single { Repo(get(), get(), get()) }
+    single { Repo(get(), get(), get(), get()) }
 }
 
 class Repo(
+    private val context: Context,
     private val api: DiscogsApi,
     private val releaseDao: ReleaseDao,
-    private val artistInfoDao: ArtistInfoDao
+    private val aboutDao: AboutDao
 ) {
 
     fun getReleases(perPage: Int, page: Int): Flow<Releases?> = flow {
@@ -41,10 +44,6 @@ class Repo(
                     else -> throw NetworkException(state)
                 }
             }
-        }
-    }.onEach { releases ->
-        releases?.releases?.let {
-            //insertReleases(it)
         }
     }.flowOn(Dispatchers.IO)
 
@@ -67,16 +66,26 @@ class Repo(
     }.flowOn(Dispatchers.IO)
 
     fun getArtistInfo(): Flow<ArtistInfo?> = flow {
-        getLocaleArtistInfo()?.let { info ->
-            emit(info)
-        } ?: with(NetworkWrapper(api.getArtistsInfo())) {
+        with(NetworkWrapper(api.getArtistsInfo())) {
             when(state) {
                 Success -> {
-                    insertArtistInfo(model)
-                    emit(getLocaleArtistInfo())
+                    emit(model)
                 }
                 else -> throw NetworkException(state)
             }
+        }
+    }.onEach { info ->
+        info?.let { data ->
+            insertAboutItem(
+                About(
+                type = AboutType.PRINCE,
+                title = context.getString(R.string.about_prince_title),
+                realName = data.realName,
+                nameVariations = data.nameVariations,
+                profile = context.getString(R.string.about_artist),
+                links = data.urls?.map { WebLink(text = null, link = it) },
+                images = data.images)
+            )
         }
     }.flowOn(Dispatchers.IO)
 
@@ -87,8 +96,8 @@ class Repo(
     fun getResults(): Flow<List<Release>?> = releaseDao.getReleases()
 
     /**
-     * ARTIST INFO DAO
+     * ABOUT DAO
      */
-    private fun insertArtistInfo(info: ArtistInfo?) = artistInfoDao.insert(info)
-    private fun getLocaleArtistInfo(): ArtistInfo? = artistInfoDao.getArtistInfo()
+    suspend fun insertAboutItem(item: About) = aboutDao.insertAboutItem(item)
+    fun getAboutItem(type: AboutType): Flow<About?> = aboutDao.getAboutItem(type)
 }

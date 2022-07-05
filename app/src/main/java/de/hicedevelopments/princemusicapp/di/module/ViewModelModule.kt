@@ -1,6 +1,6 @@
 package de.hicedevelopments.princemusicapp.di.module
 
-import de.hicedevelopments.princemusicapp.ui.artistdetail.ArtistDetailViewModel
+import de.hicedevelopments.princemusicapp.ui.about.AboutViewModel
 import de.hicedevelopments.princemusicapp.ui.releasedetail.ReleaseDetailViewModel
 import de.hicedevelopments.princemusicapp.ui.releaselist.ReleaseListViewModel
 import de.hicedevelopments.princemusicapp.ui.splash.SplashViewModel
@@ -11,5 +11,5 @@ val viewModelModule = module {
     viewModel { SplashViewModel(get()) }
     viewModel { ReleaseListViewModel(get()) }
     viewModel { ReleaseDetailViewModel(get()) }
-    viewModel { ArtistDetailViewModel(get()) }
+    viewModel { AboutViewModel(get()) }
 }

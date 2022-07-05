@@ -12,7 +12,7 @@ import androidx.transition.TransitionInflater
 import de.hicedevelopments.princemusicapp.R
 import de.hicedevelopments.princemusicapp.app.ResourceFragment
 import de.hicedevelopments.princemusicapp.app.extension.navigateUsingDirections
-import de.hicedevelopments.princemusicapp.app.extension.showToast
+import de.hicedevelopments.princemusicapp.data.model.AboutType
 import de.hicedevelopments.princemusicapp.databinding.ViewReleaseListBinding
 import de.hicedevelopments.princemusicapp.ui.releaselist.ReleaseListViewModel.ReleaseListEvent.SCROLL_TO_TOP
 import de.hicedevelopments.princemusicapp.ui.releaselist.items.ReleaseListItem
@@ -56,11 +56,11 @@ class ReleaseListScreen : ResourceFragment<ViewReleaseListBinding>(), ReleaseLis
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.about_prince -> {
-                navigateToArtistDetail()
+                navigateToAbout()
                 true
             }
             R.id.about_me -> {
-                showToast("about me")
+                navigateToAboutMe()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -96,5 +96,6 @@ class ReleaseListScreen : ResourceFragment<ViewReleaseListBinding>(), ReleaseLis
         ReleaseListScreenDirections.navReleaseListToReleaseDetail(item),
         FragmentNavigator.Extras.Builder().addSharedElement(imageView, imageView.transitionName).build()
     )
-    private fun navigateToArtistDetail() = navigateUsingDirections(ReleaseListScreenDirections.navReleaseListToArtistDetail())
+    private fun navigateToAbout() = navigateUsingDirections(ReleaseListScreenDirections.navReleaseListToAbout(AboutType.PRINCE))
+    private fun navigateToAboutMe() = navigateUsingDirections(ReleaseListScreenDirections.navReleaseListToAbout(AboutType.ME))
 }

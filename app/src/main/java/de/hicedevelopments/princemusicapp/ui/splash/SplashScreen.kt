@@ -34,6 +34,8 @@ class SplashScreen : ResourceFragment<ViewSplashBinding>() {
         }
 
         binding.viewModel = viewModel
+
+        viewModel.getData(requireContext())
     }
 
     private fun navigateToListScreen() =

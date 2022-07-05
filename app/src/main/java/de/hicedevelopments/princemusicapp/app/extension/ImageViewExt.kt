@@ -1,6 +1,7 @@
 package de.hicedevelopments.princemusicapp.app.extension
 
 import android.util.Log
+import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
@@ -43,6 +44,10 @@ fun ImageView.loadImageWithoutPlaceholder(url: String?) {
 @BindingAdapter("imageDimensionRatio")
 fun ImageView.imageDimensionRatio(image: Image) {
     if (parent !is ConstraintLayout) return
+    if (image.height == 0) {
+        layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+        return
+    }
     with(layoutParams as ConstraintLayout.LayoutParams) {
         dimensionRatio = "H, ${image.width}:${image.height}"
         layoutParams = this
