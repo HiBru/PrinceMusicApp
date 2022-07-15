@@ -40,6 +40,8 @@
                         android:layout_height="0dp"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
+                        android:tint="@color/gold"
+                        android:layout_margin="@dimen/padding_large"
                         app:srcCompat="@mipmap/prince_the_symbol_gold"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintDimensionRatio="H, 16:9"/>

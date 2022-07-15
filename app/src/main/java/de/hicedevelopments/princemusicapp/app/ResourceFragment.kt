@@ -10,15 +10,15 @@ import androidx.databinding.ViewDataBinding
 import de.hicedevelopments.princemusicapp.R
 import de.hicedevelopments.princemusicapp.app.extension.showAlert
 import de.hicedevelopments.princemusicapp.data.remote.NetworkErr
-import de.hicedevelopments.princemusicapp.data.remote.NetworkWrapper.State.NetworkError
-import de.hicedevelopments.princemusicapp.data.remote.NetworkWrapper.State.NotFoundError
 
 abstract class ResourceFragment<VB : ViewDataBinding> : BaseFragment() {
 
     private val progressOverlay: ProgressOverlay by lazy { ProgressOverlay(requireContext()) }
 
     protected open var optionsMenu: Int? = null
+
     protected lateinit var binding: VB
+
     protected abstract val layoutId: Int
     protected abstract val viewModel: BaseViewModel
 
@@ -53,17 +53,17 @@ abstract class ResourceFragment<VB : ViewDataBinding> : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bindViewModel(binding)
-        bindObserver()
-        binding.root.setOnApplyWindowInsetsListener { view, insets ->
-            val toolbar: Toolbar? = view.findViewById(R.id.toolbar)
+        binding.root.setOnApplyWindowInsetsListener { v, insets ->
+            val toolbar: Toolbar? = v.findViewById(R.id.toolbar)
             if (toolbar != null) {
-                val layoutParams: ViewGroup.MarginLayoutParams = toolbar?.layoutParams as ViewGroup.MarginLayoutParams
+                val layoutParams: ViewGroup.MarginLayoutParams = toolbar.layoutParams as ViewGroup.MarginLayoutParams
                 layoutParams.setMargins(0, insets.systemWindowInsetTop, 0, 0)
                 toolbar.layoutParams = layoutParams
             }
             insets.consumeSystemWindowInsets()
         }
+        bindViewModel(binding)
+        bindObserver()
     }
 
     private fun bindObserver() {

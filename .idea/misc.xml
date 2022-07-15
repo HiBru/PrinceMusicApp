@@ -4,11 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.47962962962962963" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.193" />
         <entry key="app/src/main/res/drawable/even_tracklist_item_bg.xml" value="0.209" />
         <entry key="app/src/main/res/drawable/ic_arrow_upward.xml" value="0.249" />
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.162" />
         <entry key="app/src/main/res/drawable/ic_circular_back.xml" value="0.209" />
         <entry key="app/src/main/res/drawable/ic_close_fullscreen.xml" value="0.249" />
+        <entry key="app/src/main/res/drawable/ic_menu_options.xml" value="0.193" />
         <entry key="app/src/main/res/drawable/ic_play_video.xml" value="0.209" />
         <entry key="app/src/main/res/drawable/ic_zoom_image.xml" value="0.249" />
         <entry key="app/src/main/res/drawable/odd_tracklist_item_bg.xml" value="0.209" />
